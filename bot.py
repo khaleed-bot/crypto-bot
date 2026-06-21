@@ -1,3 +1,5 @@
+import os
+from dotenv import load_dotenv
 import requests
 import mplfinance as mpf
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
@@ -6,7 +8,11 @@ import ccxt
 import pandas as pd
 import pandas_ta as ta
 
-TOKEN = "***REMOVED***"
+load_dotenv()  # loads variables from a local .env file, if present (no-op on Railway)
+TOKEN = os.environ.get("BOT_TOKEN")
+if not TOKEN:
+    raise RuntimeError("BOT_TOKEN environment variable is not set. Set it in your .env file (local) or Railway Variables (production).")
+
 last_alerts = {}
 active_alert_chats = {}
 exchange = ccxt.mexc()
