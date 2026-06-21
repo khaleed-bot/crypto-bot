@@ -6,3 +6,4 @@ pandas-ta
 mplfinance
 requests
 matplotlib
+python-dotenv
